@@ -63,9 +63,26 @@
     }
 
     async function getFriendship() {
+    
+    
     }
 
     async function sendMsg() {
+
+      if(liff.getContext().type !== "none"){
+        await liff.sendMessages([
+          {
+            "type": "sticker",
+            "stickerId" :1,
+            "package" : 1
+          }
+
+        ])
+
+        alert("Message sent")
+      }
+
+
     }
 
     function getContext() {
@@ -77,7 +94,8 @@
     }
 
     async function getUserProfile() {
-    const profile = await liff.getProfile() 
+    const profile = await liff.getProfile()
+
     document.getElementById("pictureUrl").src = profile.pictureUrl
     document.getElementById("userId").append(profile.userId)
     document.getElementById("statsMessage").append(profile.statusMessage)
