@@ -45,26 +45,51 @@
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script> 
   <script>
     function createUniversalLink() {
+
     }
 
     async function shareMsg() {
     }
 
     function logOut() {
+
     }
 
     function closed() {
+      liff.closeWindow()
     }
 
     async function scanCode() {
+      const result = await liff.scanCode() 
+      document.getElementById("scanCode").append(result.value) 
     }
 
     function openWindow() {
+      liff.openWindow(
+        {
+          url: "https://line.me",
+          external:true
+        }
+      )
+
     }
 
     async function getFriendship() {
+    const friend = await liff.getFriendship()
     
-    
+    document.getElementById("friendship").append(friend.friendFlag) 
+    if(!friend.friendFlag){
+      if(confirm("คุณยังไม่ได้ เพิ่ม Bot เป็นเพื่อน จะเพิ่มเลยไหม ?"))
+      {
+        Window.location = "https://xxxxxxxx"
+     
+      }
+
+
+
+
+    }
+
     }
 
     async function sendMsg() {
@@ -94,7 +119,7 @@
     }
 
     async function getUserProfile() {
-      
+
     const profile = await liff.getProfile()
 
     document.getElementById("pictureUrl").src = profile.pictureUrl
@@ -123,12 +148,19 @@
     }
 
     async function main() {
-  
-      await liff.init({ liffId: "2004841069-VbQmne5P" })
-       getEnvironment()
-       getUserProfile()
-       getContext()
-      // getFriendship()
+    await liff.init({ liffId: "2004841069-VbQmne5P" })
+
+    document.getElementById("isLoggedIn").append(liff.isLoggedIn())
+    if(liff.isLoggedIn()){
+      getEnvironment()
+      getUserProfile()
+      getContext()
+      getFriendship()
+
+    } else {
+      liff.login()
+    }
+
       // createUniversalLink()
     }
     main()
