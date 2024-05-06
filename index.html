@@ -49,6 +49,19 @@
     }
 
     async function shareMsg() {
+      await liff.shareTargetPicker([
+
+      {
+        "type": "text",
+        "text": "This message was senr by ShareTargetPicker"
+      }
+
+      ])
+
+
+
+
+
     }
 
     function logOut() {
@@ -121,12 +134,12 @@
     }
 
     async function getUserProfile() {
-      const profile = await liff.getProfile()
+    const profile = await liff.getProfile()
       document.getElementById("pictureUrl").src = profile.pictureUrl
       document.getElementById("userId").append(profile.userId)
       document.getElementById("statusMessage").append(profile.statusMessage)
       document.getElementById("displayName").append(profile.displayName)
-     // document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
+      document.getElementById("decodedIDToken").append(liff.getDecodedIDToken().email)
 
 
     }
@@ -138,13 +151,13 @@
     document.getElementById("accessToken").append(liff.getAccessToken())
     document.getElementById("isInClient").append(liff.isInClient())
 
-    if(liff.isInClient()) {
-    document.getElementById("btnLogout").style.display = "none"
-    }else{
-    document.getElementById("btnMsg").style.display = "none"
-    document.getElementById("btnScanCode").style.display = "none"
-    document.getElementById("btnClose").style.display = "none"
-    }
+    if (liff.isInClient()) {
+        document.getElementById("btnLogOut").style.display = "none"
+      } else {
+        document.getElementById("btnMsg").style.display = "none"
+        document.getElementById("btnScanCode").style.display = "none"
+        document.getElementById("btnClose").style.display = "none"
+      }
     
     }
 
